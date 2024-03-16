@@ -1,0 +1,43 @@
+basePath: /api/stori
+host: stori.swagger.io
+info:
+  contact: {}
+  description: System that processes transactions
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: API stori
+  version: 0.0.1
+paths:
+  /transaction:
+    post:
+      consumes:
+      - application/json
+      description: upload transactions for a user
+      parameters:
+      - description: file
+        in: path
+        name: file
+        required: true
+        type: integer
+      - description: email
+        in: path
+        name: email
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema: {}
+        default:
+          description: ""
+          schema:
+            type: string
+      summary: upload csv file of transactions
+      tags:
+      - transactions
+swagger: "2.0"
