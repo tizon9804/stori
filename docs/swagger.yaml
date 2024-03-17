@@ -1,5 +1,5 @@
 basePath: /api/stori
-host: 52.202.149.44
+host: 52.202.149.44/
 info:
   contact: {}
   description: System that processes transactions
@@ -9,7 +9,7 @@ info:
   title: API stori
   version: 0.0.1
 paths:
-  /Transaction/upload:
+  /transaction/upload:
     post:
       consumes:
       - application/json

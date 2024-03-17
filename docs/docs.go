@@ -19,7 +19,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/Transaction/upload": {
+        "/transaction/upload": {
             "post": {
                 "description": "upload transactions for a user",
                 "consumes": [
@@ -71,7 +71,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "0.0.1",
-	Host:             "52.202.149.44",
+	Host:             "52.202.149.44/",
 	BasePath:         "/api/stori",
 	Schemes:          []string{},
 	Title:            "API stori",

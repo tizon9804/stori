@@ -18,7 +18,7 @@ import (
 // @failure 400 {object} error
 // @response default {object} string
 // @Header 200 {string} Location
-// @Router /Transaction/upload [post]
+// @Router /transaction/upload [post]
 func TransactionFileHandler(transaction Transaction) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		email := ctx.Request.FormValue("email")

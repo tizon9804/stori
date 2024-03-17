@@ -9,7 +9,7 @@ import "stori/routes"
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host 52.202.149.44
+// @host 52.202.149.44/
 // @BasePath /api/stori
 func main() {
 	router := routes.NewRouter()

@@ -10,10 +10,10 @@
         },
         "version": "0.0.1"
     },
-    "host": "52.202.149.44",
+    "host": "52.202.149.44/",
     "basePath": "/api/stori",
     "paths": {
-        "/Transaction/upload": {
+        "/transaction/upload": {
             "post": {
                 "description": "upload transactions for a user",
                 "consumes": [
