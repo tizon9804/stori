@@ -1,5 +1,5 @@
 basePath: /api/stori
-host: stori.swagger.io
+host: 52.202.149.44
 info:
   contact: {}
   description: System that processes transactions
@@ -9,20 +9,20 @@ info:
   title: API stori
   version: 0.0.1
 paths:
-  /transaction:
+  /Transaction/upload:
     post:
       consumes:
       - application/json
       description: upload transactions for a user
       parameters:
-      - description: file
-        in: path
+      - description: File to upload
+        in: formData
         name: file
         required: true
-        type: integer
-      - description: email
-        in: path
-        name: email
+        type: file
+      - description: Email
+        in: formData
+        name: Email
         required: true
         type: string
       produces:

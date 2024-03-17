@@ -19,7 +19,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/transaction": {
+        "/Transaction/upload": {
             "post": {
                 "description": "upload transactions for a user",
                 "consumes": [
@@ -34,17 +34,17 @@ const docTemplate = `{
                 "summary": "upload csv file of transactions",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "file",
+                        "type": "file",
+                        "description": "File to upload",
                         "name": "file",
-                        "in": "path",
+                        "in": "formData",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "email",
-                        "name": "email",
-                        "in": "path",
+                        "description": "Email",
+                        "name": "Email",
+                        "in": "formData",
                         "required": true
                     }
                 ],
@@ -71,7 +71,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "0.0.1",
-	Host:             "stori.swagger.io",
+	Host:             "52.202.149.44",
 	BasePath:         "/api/stori",
 	Schemes:          []string{},
 	Title:            "API stori",

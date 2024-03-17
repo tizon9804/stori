@@ -12,8 +12,8 @@ import (
 // @Tags transactions
 // @Accept  json
 // @Produce  json
-// @Param  file path multipart.File true "file"
-// @Param  Email path string true "Email"
+// @Param file formData file true "File to upload"
+// @Param  Email formData string true "Email"
 // @Success 204
 // @failure 400 {object} error
 // @response default {object} string

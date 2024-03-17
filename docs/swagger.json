@@ -10,10 +10,10 @@
         },
         "version": "0.0.1"
     },
-    "host": "stori.swagger.io",
+    "host": "52.202.149.44",
     "basePath": "/api/stori",
     "paths": {
-        "/transaction": {
+        "/Transaction/upload": {
             "post": {
                 "description": "upload transactions for a user",
                 "consumes": [
@@ -28,17 +28,17 @@
                 "summary": "upload csv file of transactions",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "file",
+                        "type": "file",
+                        "description": "File to upload",
                         "name": "file",
-                        "in": "path",
+                        "in": "formData",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "email",
-                        "name": "email",
-                        "in": "path",
+                        "description": "Email",
+                        "name": "Email",
+                        "in": "formData",
                         "required": true
                     }
                 ],
