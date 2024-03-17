@@ -13,7 +13,7 @@ import (
 // @Accept  json
 // @Produce  json
 // @Param file formData file true "File to upload"
-// @Param  Email formData string true "Email"
+// @Param  email formData string true "email"
 // @Success 204
 // @failure 400 {object} error
 // @response default {object} string

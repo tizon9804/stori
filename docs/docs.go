@@ -42,8 +42,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "Email",
-                        "name": "Email",
+                        "description": "email",
+                        "name": "email",
                         "in": "formData",
                         "required": true
                     }

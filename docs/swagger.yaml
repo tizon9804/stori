@@ -20,9 +20,9 @@ paths:
         name: file
         required: true
         type: file
-      - description: Email
+      - description: email
         in: formData
-        name: Email
+        name: email
         required: true
         type: string
       produces:
