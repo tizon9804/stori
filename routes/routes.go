@@ -6,6 +6,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"net/http"
 	"stori/docs"
+	"stori/postgres"
 	"stori/transactions"
 )
 
@@ -25,7 +26,12 @@ func NewRouter() *gin.Engine {
 		})
 	})
 
-	transactionService := transactions.NewTransaction()
+	newPostgres, err := postgres.NewPostgres()
+	if err != nil {
+		panic(err)
+	}
+	storage := transactions.NewStorage(newPostgres)
+	transactionService := transactions.NewTransaction(storage)
 	api.POST("/transaction/upload", transactions.TransactionFileHandler(transactionService))
 
 	return engine

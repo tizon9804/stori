@@ -3,6 +3,7 @@ package transactions
 import (
 	"encoding/csv"
 	"errors"
+	"fmt"
 	"io"
 	"stori/email"
 )
@@ -12,10 +13,13 @@ type Transaction interface {
 }
 
 type Service struct {
+	storage Storage
 }
 
-func NewTransaction() Transaction {
-	return Service{}
+func NewTransaction(storage Storage) Transaction {
+	return Service{
+		storage: storage,
+	}
 }
 
 func (s Service) ProcessFile(file io.Reader, email string) error {
@@ -24,7 +28,7 @@ func (s Service) ProcessFile(file io.Reader, email string) error {
 	if err != nil {
 		return errors.New("empty file")
 	}
-	var transactions []UserTransaction
+	var transactions UserTransactions
 	for {
 		record, err := reader.Read()
 		if err != nil {
@@ -33,37 +37,64 @@ func (s Service) ProcessFile(file io.Reader, email string) error {
 			}
 			break
 		}
-		err = s.processTransaction(record, &transactions)
+		err = s.processTransaction(record, email, &transactions)
 		if err != nil {
 			return err
 		}
 	}
-
-	return s.ReportUserBalance(transactions, email)
+	err = s.storage.SaveTransactions(transactions)
+	if err != nil {
+		return err
+	}
+	var transactionsDB UserTransactions
+	err = s.storage.GetUserTransactions(email, &transactionsDB)
+	if err != nil {
+		return err
+	}
+	s.ReportUserBalance(transactionsDB, email)
+	return nil
 }
 
-func (s Service) processTransaction(record Record, transactions *[]UserTransaction) error {
+func (s Service) processTransaction(record Record, email string, transactions *UserTransactions) error {
 	transaction, err := record.GetUserTransaction()
 	if err != nil {
 		return err
 	}
+	transaction.Email = email
 	*transactions = append(*transactions, transaction)
 	return nil
 }
 
-func (s Service) ReportUserBalance(transactions []UserTransaction, userEmail string) error {
-
+func (s Service) ReportUserBalance(transactions UserTransactions, userEmail string) {
+	stats := transactions.GetStats()
 	balance := email.Message{
 		Title: "Total balance is: ",
-		Value: "39.74",
+		Value: fmt.Sprintf("%v", stats.balance),
 	}
-	t1 := email.Message{
-		Title: "Number of transactions in July: ",
-		Value: "2",
+	var transactionsMonth []email.Message
+	for month, count := range stats.transactionPerMonth {
+		tm := email.Message{
+			Title: fmt.Sprintf("Number of transactions in %s:", month),
+			Value: fmt.Sprintf("%v", count),
+		}
+		transactionsMonth = append(transactionsMonth, tm)
 	}
-	t2 := email.Message{
+	avgDebit := email.Message{
 		Title: "Average debit amount: ",
-		Value: "20.5",
+		Value: fmt.Sprintf("%v", stats.avgDebit),
 	}
-	return email.Send([]email.Message{balance, t2, t1}, userEmail)
+	avgCredit := email.Message{
+		Title: "Average credit amount:",
+		Value: fmt.Sprintf("%v", stats.avgCredit),
+	}
+	messages := []email.Message{balance, avgCredit, avgDebit}
+	messages = append(messages, transactionsMonth...)
+
+	go func() {
+		err := email.Send(messages, userEmail)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		fmt.Println("Email Sent")
+	}()
 }

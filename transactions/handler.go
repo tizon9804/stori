@@ -13,12 +13,12 @@ import (
 // @Accept  json
 // @Produce  json
 // @Param  file path multipart.File true "file"
-// @Param  email path string true "email"
+// @Param  Email path string true "Email"
 // @Success 204
 // @failure 400 {object} error
 // @response default {object} string
 // @Header 200 {string} Location
-// @Router /transaction/upload [post]
+// @Router /Transaction/upload [post]
 func TransactionFileHandler(transaction Transaction) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		email := ctx.Request.FormValue("email")
@@ -34,7 +34,7 @@ func TransactionFileHandler(transaction Transaction) gin.HandlerFunc {
 		defer file.Close()
 
 		if err = transaction.ProcessFile(file, email); err != nil {
-			ctx.JSON(http.StatusInternalServerError, err)
+			ctx.JSON(http.StatusInternalServerError, err.Error())
 			return
 		}
 
