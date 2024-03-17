@@ -14,11 +14,11 @@ RUN PROJECT
 - install docker
 - change credentials of your own postgres database in postgres/postgres.go
 - execute ./deploy.sh
-- or run main.go
+- or go run main.go
 
 >http://52.202.149.44/api/stori/swagger/index.html
 
-file Template
+File Template
 
 > docs/fileTemplate.csv
 
