@@ -7,7 +7,7 @@ import (
 )
 
 func NewPostgres() (*gorm.DB, error) {
-	connectionString := "postgresql://postgres:12345678a@localhost:5432/postgres?sslmode=disable"
+	connectionString := "postgresql://postgres:gqMgnayv9nR7u7i@tizon.cjxcsq7qqmym.us-east-1.rds.amazonaws.com:5432/postgres?sslmode=disable"
 	DB, err := gorm.Open("postgres", connectionString)
 	if err != nil {
 		return nil, err
