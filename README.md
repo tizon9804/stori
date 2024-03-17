@@ -18,6 +18,10 @@ RUN PROJECT
 
 >http://52.202.149.44/api/stori/swagger/index.html
 
+file Template
+
+> docs/fileTemplate.csv
+
 POST to CLOUD AWS
 
 ``
