@@ -16,7 +16,7 @@ RUN PROJECT
 - execute ./deploy.sh
 - or go run main.go
 
->http://52.202.149.44/api/stori/swagger/index.html
+>http://3.91.251.235/api/stori/swagger/index.html
 
 File Template
 
@@ -25,7 +25,7 @@ File Template
 POST to CLOUD AWS
 
 ``
-curl --location '52.202.149.44/api/stori/transaction/upload' \
+curl --location '3.91.251.235/api/stori/transaction/upload' \
 --form 'email="tivetind23@gmail.com"' \
 --form 'file=@"/Users/tizon/Documents/github/stori/docs/fileTemplate.csv"'
 ``
